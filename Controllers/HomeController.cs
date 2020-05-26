@@ -10,7 +10,7 @@ namespace WebEndProject.Controllers
     {
         public ActionResult Index()
         {
-            ViewBag.Title = "Home Page";
+            ViewBag.Title = "Quotes";
 
             return View();
         }
