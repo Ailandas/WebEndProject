@@ -162,9 +162,12 @@
     <Compile Include="Controllers\QuoteController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="ExternalAPI\150000quotes.cs" />
+    <Compile Include="ExternalAPI\Dictionary.cs" />
+    <Compile Include="ExternalAPI\Translator.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Dictionary.cs" />
     <Compile Include="Models\Quote.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

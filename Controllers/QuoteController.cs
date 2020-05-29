@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RestSharp;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -13,8 +14,11 @@ namespace WebEndProject.Controllers
         [Route("api/quote/{keyword}")]
         public string Get(string keyword)
         {
-            ExternalAPI._150000quotes fetchQuote = new ExternalAPI._150000quotes(keyword);
-            return fetchQuote.jsonAsString;
+            ExternalAPI.Dictionary fetchWord = new ExternalAPI.Dictionary(keyword);//gauna dictionary pagal keyword
+
+            ExternalAPI._150000quotes fetchQuote = new ExternalAPI._150000quotes(keyword);//gauna quote pagal keyword
+
+            return fetchQuote.jsonAsString +"---------------------------------"+fetchWord.moreWords;
         }
         ////////////////////////////////////////////////////////
 
