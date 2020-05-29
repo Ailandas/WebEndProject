@@ -16,7 +16,7 @@ namespace WebEndProject.ExternalAPI
     public class _150000quotes
     {
         public string jsonAsString="Empty quote";
-        public Models.Quote quote;//quote deserialized objektas
+        public Models.Quote quote= new Models.Quote();//quote deserialized objektas
 
         public _150000quotes(string keyword)
         {
@@ -32,7 +32,7 @@ namespace WebEndProject.ExternalAPI
             jsonAsString = response.Content;
             if (jsonAsString == "No Quote Found Under Your Query. Please try again.")//jei nerastas quote pagal keyword
                 jsonAsString = new _150000quotes("Life").jsonAsString;//pakeicia tuscia quote i quote su keyword "Life"
-            //quote = JsonConvert.DeserializeObject<Models.Quote>(jsonAsString);
+            quote = JsonConvert.DeserializeObject<Models.Quote>(jsonAsString);
         }
     }
 }

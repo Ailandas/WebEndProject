@@ -18,6 +18,9 @@ namespace WebEndProject.Controllers
 
             ExternalAPI._150000quotes fetchQuote = new ExternalAPI._150000quotes(keyword);//gauna quote pagal keyword
 
+            //ExternalAPI.Translator fetchTranslation = new ExternalAPI.Translator(fetchQuote.quote.Message);
+
+            //return fetchTranslation.translatedText;
             return fetchQuote.jsonAsString +"---------------------------------"+fetchWord.moreWords;
         }
         ////////////////////////////////////////////////////////
