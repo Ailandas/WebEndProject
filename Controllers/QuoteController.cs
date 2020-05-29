@@ -1,9 +1,11 @@
 ﻿using RestSharp;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Web;
 using System.Web.Http;
 
 namespace WebEndProject.Controllers
@@ -11,7 +13,7 @@ namespace WebEndProject.Controllers
     public class QuoteController : ApiController
     {
         ////////////////custom //////////////////////////////////
-        [Route("api/quote/{keyword}")]
+        [Route("api/word/{keyword}")]
         public string Get(string keyword)
         {
             ExternalAPI.Dictionary fetchWord = new ExternalAPI.Dictionary(keyword);//gauna dictionary pagal keyword
@@ -26,13 +28,18 @@ namespace WebEndProject.Controllers
         ////////////////////////////////////////////////////////
 
 
-        
+
 
 
         // GET: api/Quote
-        public IEnumerable<string> Get()
+        [Route("api/word/{category}/{word}")]
+        [System.Web.Http.AcceptVerbs("GET", "POST")]
+        [System.Web.Http.HttpGet]
+        public string Post(string category, string word) //Not found, neranda duomenu bazes
         {
-            return new string[] { "Default quote controller", "value2" };
+            Models.SqlLite.InsertToDatabase(category, word);
+            //string Path = HttpContext.Current.Server.MapPath("~");
+            return "success";
         }
 
         //GET: api/Quote/5
