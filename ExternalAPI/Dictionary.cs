@@ -14,7 +14,7 @@ namespace WebEndProject.ExternalAPI
 
         public Dictionary(string keyword)
         {
-            var client = new RestClient($"https://wordsapiv1.p.rapidapi.com/words/{keyword}/definitions");
+            var client = new RestClient($"https://wordsapiv1.p.rapidapi.com/words/{keyword}/hasCategories");
             var request = new RestRequest(Method.GET);
             request.AddHeader("x-rapidapi-host", "wordsapiv1.p.rapidapi.com");
             request.AddHeader("x-rapidapi-key", "d54c1da138msh4358497f877f566p11c3f3jsn33823fb42aea");

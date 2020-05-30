@@ -1,11 +1,9 @@
 ﻿using RestSharp;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Web;
 using System.Web.Http;
 
 namespace WebEndProject.Controllers
@@ -13,7 +11,7 @@ namespace WebEndProject.Controllers
     public class QuoteController : ApiController
     {
         ////////////////custom //////////////////////////////////
-        [Route("api/word/{keyword}")]
+        [Route("api/quoteDictionary/{keyword}")]
         public string Get(string keyword)
         {
             ExternalAPI.Dictionary fetchWord = new ExternalAPI.Dictionary(keyword);//gauna dictionary pagal keyword
@@ -28,18 +26,32 @@ namespace WebEndProject.Controllers
         ////////////////////////////////////////////////////////
 
 
+        [Route("api/quoteDictionary/{category}/{word}")]
+        
+        [System.Web.Http.HttpPost]
+        public IHttpActionResult Post(string category, string word) //Prideda nauja zodi i duombaze
+        {
+            
+            Models.SqlLite.InsertToDatabase(category, word);
 
+            return Ok(200);
+        }
 
+        [Route("api/quoteDictionary/categories")]
+
+        [System.Web.Http.HttpGet]
+        public IHttpActionResult GetCategories() //Grazins visa sarasa kategoriju su reiksmemis
+        {
+
+          
+
+            return Ok(200);
+        }
 
         // GET: api/Quote
-        [Route("api/word/{category}/{word}")]
-        [System.Web.Http.AcceptVerbs("GET", "POST")]
-        [System.Web.Http.HttpGet]
-        public string Post(string category, string word) //Not found, neranda duomenu bazes
+        public IEnumerable<string> Get()
         {
-            Models.SqlLite.InsertToDatabase(category, word);
-            //string Path = HttpContext.Current.Server.MapPath("~");
-            return "success";
+            return new string[] { "Default quote controller", "value2" };
         }
 
         //GET: api/Quote/5
