@@ -1,4 +1,6 @@
-﻿using RestSharp;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using RestSharp;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -15,22 +17,21 @@ namespace WebEndProject.Controllers
 {
     public class QuoteController : ApiController
     {
+        //http://localhost:58065/api/quoteDictionary?kategorija=kategorija&zodis=zodis&laikas=diena Patalpinti nauja
+
         ////////////////custom //////////////////////////////////
         [Route("api/quotedictionary/{category}")]
-        public IHttpActionResult Get(string category)
+        public List<object> Get(string category)
         {
             
              bool existance=Models.SqlLite.CheckIfCategoryEgzists(category);
              if (existance == true)
              {
 
-                List<string> cachingList = new List<string>();
-                cachingList = (List<string>)MemoryCacher.GetValue("category");
+                List<object> cachingList = new List<object>();
+                cachingList = (List<object>)MemoryCacher.GetValue(category);
                 if (cachingList != null)
-                {
-                    cachingList.Add("Extra");
-                    return Ok(cachingList);
-                }
+                    return cachingList;//jei yra cachinge, grazina is cache
                 else
                 {
                     DateTime now = DateTime.Now;
@@ -44,88 +45,68 @@ namespace WebEndProject.Controllers
 
                     ExternalAPI.Translator fetchTranslation = new ExternalAPI.Translator(fetchQuote.quote.Message);
 
-
-                    List<string> TempCachingList = new List<string>();
+                    List<object> TempCachingList = new List<object>();
                     TempCachingList.Add(fetchQuote.quote.Message);
                     TempCachingList.Add(fetchTranslation.translatedText.ToString());
-                    TempCachingList.Add(fetchWord.moreWords);
-                    MemoryCacher.Add("category", TempCachingList, DateTimeOffset.UtcNow.AddMinutes(1));
-                    return Ok(fetchQuote.quote.Message + " => " + fetchTranslation.translatedText.ToString() + " => " + fetchWord.moreWords);
+                    TempCachingList.Add(fetchWord.o);
+                    MemoryCacher.Add(category, TempCachingList, DateTimeOffset.UtcNow.AddMinutes(1));
+                    return TempCachingList;
                 }
              }
              else
              {
-                 return NotFound();
+                return null;
              }
-            
         }
-      
 
-        //http://localhost:58065/api/quoteDictionary?kategorija=kategorija&zodis=zodis&laikas=diena Patalpinti nauja
+
         [Route("api/quotedictionary")]
-        [System.Web.Http.HttpPost]
-        public IHttpActionResult Post([FromUri] string kategorija, [FromUri] string zodis, [FromUri] string laikas) //Prideda nauja zodi i duombaze
+        [HttpPost]
+        public IHttpActionResult Post([FromBody] PostObject obj)//Prideda nauja zodi i duombaze
         {
-            
+            /*    { "kategorija": "TestKategorija",
+                    "zodis": "TestZodis",
+                    "laikas": "Diena"}
+             */
             try
-             {
-                 if(laikas.Contains("rytas") || laikas.Contains("diena") || laikas.Contains("naktis"))
-                 {
-                     if (laikas.Contains("rytas"))
-                     {
-
-                        Models.SqlLite.InsertToDatabase(kategorija, zodis, 0);
+            {
+                string uppercaseTime = obj.laikas.ToUpper();
+                List<Time> timeOptions = SqlLite.GetTimes();
+                foreach (var time in timeOptions)
+                {
+                    if (time.GetName() == uppercaseTime)
+                    {
+                        Models.SqlLite.InsertToDatabase(obj.kategorija, obj.zodis, time.GetID());
                         return Ok(200);
-                     }
-                     else if(laikas.Contains("diena"))
-                     {
-                         Models.SqlLite.InsertToDatabase(kategorija, zodis, 1);
-
-                         return Ok(200);
-                     }
-                     else
-                     {
-                         Models.SqlLite.InsertToDatabase(kategorija, zodis, 2);
-
-                         return Ok(200);
-                     }
-
-                 }
-                 else
-                 {
-                     return NotFound();
-                 }
-
-             }
-             catch(Exception exc)
-             {
-                 return NotFound();
-             }
-
-
-
+                    }
+                }
+                return NotFound();
+            }
+            catch (Exception exc)
+            {
+                return NotFound();
+            }
         }
 
-       
+
         [Route("api/quotedictionary/categories")]
         [System.Web.Http.HttpGet]
-        
-        public string GetCategories() //Grazins visa sarasa kategoriju su reiksmemis
+
+        public List<Category> GetCategories() //Grazins visa sarasa kategoriju su reiksmemis
         {
             string baseUrl = (Url.Request.RequestUri.GetComponents(
                     UriComponents.SchemeAndServer, UriFormat.Unescaped).TrimEnd('/')
                  + System.Web.HttpContext.Current.Request.ApplicationPath).TrimEnd('/');
 
-             List<Category> cachingList = new List<Category>();
-             cachingList = (List<Category>)MemoryCacher.GetValue("categories");
+            List<Category> cachingList = new List<Category>();
+            cachingList = (List<Category>)MemoryCacher.GetValue("categories");
 
-             if (cachingList != null)
-             {
-
-                 return Newtonsoft.Json.JsonConvert.SerializeObject(cachingList).ToString();
+            if (cachingList != null)
+            {
+                return cachingList;//Newtonsoft.Json.JsonConvert.SerializeObject(cachingList).ToString();
             }
-             else
-             {
+            else
+            {
                 List<Category> categories = Models.SqlLite.GetCategories();
                 for (int i=0; i<categories.Count; i++)
                 {
@@ -138,8 +119,8 @@ namespace WebEndProject.Controllers
                 }
                 
                 MemoryCacher.Add("categories", categories, DateTimeOffset.UtcNow.AddMinutes(1));
-                
-                return Newtonsoft.Json.JsonConvert.SerializeObject(categories).ToString(); 
+
+                return categories;//Newtonsoft.Json.JsonConvert.SerializeObject(categories).ToString(); 
              }
             
 
@@ -215,23 +196,22 @@ namespace WebEndProject.Controllers
 
         [Route("api/quotedictionary/words/{word}")]
         [System.Web.Http.HttpGet]
-        public IHttpActionResult GetSingleWord(string word) //Gauna single word
+        public ExternalAPI.Dictionary GetSingleWord(string word) //Gauna single word
         {
 
-            ExternalAPI.Dictionary dictionary = (ExternalAPI.Dictionary)MemoryCacher.GetValue("SingleWord");
+            ExternalAPI.Dictionary dictionary = (ExternalAPI.Dictionary)MemoryCacher.GetValue(word);
 
             if (dictionary != null)
             {
-                return Ok(dictionary.moreWords.ToString());
+                return dictionary;//Ok(dictionary.moreWords.ToString());
             }
             else
             {
                 ExternalAPI.Dictionary fetchWord = new ExternalAPI.Dictionary(word);
-                MemoryCacher.Add("SingleWord", fetchWord, DateTimeOffset.UtcNow.AddMinutes(1));
-                return Ok(fetchWord.moreWords.ToString());
-            }
-
-              
+                MemoryCacher.Add(word, fetchWord, DateTimeOffset.UtcNow.AddMinutes(1));
+                return fetchWord;//Ok(fetchWord.moreWords.ToString());
+            }  
         }
+
     }
 }

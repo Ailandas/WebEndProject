@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using RestSharp;
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,9 @@ namespace WebEndProject.ExternalAPI
 {
     public class Dictionary
     {
+
+
+        public JObject o;
         public string moreWords = "Empty word";
         public Models.Dictionary dictionary = new Models.Dictionary();//dictionary deserialized objektas
 
@@ -20,6 +24,7 @@ namespace WebEndProject.ExternalAPI
             request.AddHeader("x-rapidapi-key", "d54c1da138msh4358497f877f566p11c3f3jsn33823fb42aea");
             IRestResponse response = client.Execute(request);
             moreWords = response.Content;
+            o = JObject.Parse(moreWords);
             dictionary = JsonConvert.DeserializeObject<Models.Dictionary>(moreWords);
         }
     }

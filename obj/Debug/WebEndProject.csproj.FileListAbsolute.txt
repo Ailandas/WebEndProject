@@ -175,3 +175,6 @@ C:\Users\Ailandas\Desktop\Web Paslaugos\WebGalutinis\WebEndProject-d7c898efca2d5
 C:\Users\Ailandas\Desktop\Web Paslaugos\WebGalutinis\WebEndProject-d7c898efca2d56cb6afdb16c1ebe845ad7420fa1\obj\Debug\WebEndProject.csproj.CopyComplete
 C:\Users\Ailandas\Desktop\Web Paslaugos\WebGalutinis\WebEndProject-d7c898efca2d56cb6afdb16c1ebe845ad7420fa1\obj\Debug\WebEndProject.dll
 C:\Users\Ailandas\Desktop\Web Paslaugos\WebGalutinis\WebEndProject-d7c898efca2d56cb6afdb16c1ebe845ad7420fa1\obj\Debug\WebEndProject.pdb
+C:\Users\getti\Desktop\WorldOfQuotes\WebEndProject\bin\System.Data.SQLite.dll
+C:\Users\getti\Desktop\WorldOfQuotes\WebEndProject\bin\System.Data.SQLite.xml
+C:\Users\getti\Desktop\WorldOfQuotes\WebEndProject\bin\System.Data.SQLite.dll.config
