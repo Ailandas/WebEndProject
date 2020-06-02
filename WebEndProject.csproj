@@ -173,6 +173,7 @@
     </Compile>
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Dictionary.cs" />
+    <Compile Include="Models\Link.cs" />
     <Compile Include="Models\MemoryCacher.cs" />
     <Compile Include="Models\PostObject.cs" />
     <Compile Include="Models\Quote.cs" />

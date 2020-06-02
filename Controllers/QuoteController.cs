@@ -88,10 +88,8 @@ namespace WebEndProject.Controllers
             }
         }
 
-
         [Route("api/quotedictionary/categories")]
-        [System.Web.Http.HttpGet]
-
+        [HttpGet]
         public List<Category> GetCategories() //Grazins visa sarasa kategoriju su reiksmemis
         {
             string baseUrl = (Url.Request.RequestUri.GetComponents(
@@ -110,11 +108,19 @@ namespace WebEndProject.Controllers
                 List<Category> categories = Models.SqlLite.GetCategories();
                 for (int i=0; i<categories.Count; i++)
                 {
-                    string linkDelete = "DELETE: "+baseUrl + $"/api/quotedictionary/categories/{categories[i].GetName()}";
-                    string linkLookup = "GET self : " + baseUrl + $"/api/quotedictionary/categories/{categories[i].GetName()}";
-                    List<string> tempLinks = new List<string>();
-                    tempLinks.Add(linkDelete);
-                    tempLinks.Add(linkLookup);
+                    Link link = new Link();
+                    link.href= baseUrl + $"/api/quotedictionary/categories/{categories[i].GetName()}";
+                    link.method = "DELETE";
+                    link.rel = "delete_self";
+                    Link link1 = new Link();
+                    link1.href = baseUrl + $"/api/quotedictionary/categories/{categories[i].GetName()}";
+                    link1.method = "GET";
+                    link1.rel = "delete_self";
+
+                    List<Link> tempLinks = new List<Link>();
+                    tempLinks.Add(link);
+                    tempLinks.Add(link1);
+
                     categories[i].SetLinks(tempLinks);
                 }
                 
@@ -129,43 +135,45 @@ namespace WebEndProject.Controllers
         }
 
         [Route("api/quotedictionary/categories/{category}")]
-        [System.Web.Http.HttpGet]
+        [HttpGet]
         public IHttpActionResult GetCategoryEntries(string category) // Grazins visas reiksmes is kategorijos
         {
-            
-           
-                List<SingleWord> cachingList = new List<SingleWord>();
-                cachingList = (List<SingleWord>)MemoryCacher.GetValue("CategoryEntries");
-                if (cachingList != null)
-                {
-                    return Ok(cachingList);
-                }
-                else
-                {
-                    string baseUrl = (Url.Request.RequestUri.GetComponents(
-                     UriComponents.SchemeAndServer, UriFormat.Unescaped).TrimEnd('/')
-                  + System.Web.HttpContext.Current.Request.ApplicationPath).TrimEnd('/');
+            List<SingleWord> cachingList = new List<SingleWord>();
+            cachingList = (List<SingleWord>)MemoryCacher.GetValue("CategoryEntries");
+            if (cachingList != null)
+            {
+                return Ok(cachingList);
+            }
+            else
+            {
+                string baseUrl = (Url.Request.RequestUri.GetComponents(
+                 UriComponents.SchemeAndServer, UriFormat.Unescaped).TrimEnd('/')
+              + System.Web.HttpContext.Current.Request.ApplicationPath).TrimEnd('/');
 
                 List<SingleWord> SingleCategory = Models.SqlLite.GetEntriesByCategory(category);
-                    for(int i=0; i < SingleCategory.Count; i++)
-                    {
-                    string linkDelete = "DELETE: " + baseUrl + $"/api/quotedictionary/words/{SingleCategory[i].Word}";
-                    string linkLookup = "GET self : " + baseUrl + $"/api/quotedictionary/words/{SingleCategory[i].Word}";
-                    SingleCategory[i].links.Add(linkDelete);
-                    SingleCategory[i].links.Add(linkLookup);
-                }
-                    MemoryCacher.Add("CategoryEntries", SingleCategory, DateTimeOffset.UtcNow.AddMinutes(1));
-                    
-                    return Ok(SingleCategory);
-                }
-           
-           
+                for (int i = 0; i < SingleCategory.Count; i++)
+                {
+                    //linkas deletinimui
+                    Link link = new Link();
+                    link.href = "DELETE: " + baseUrl + $"/api/quotedictionary/words/{SingleCategory[i].Word}";
+                    link.method = "DELETE";
+                    link.rel = "delete_self";
+                    //linkas getinimui
+                    Link link1 = new Link();
+                    link1.href = "GET self : " + baseUrl + $"/api/quotedictionary/words/{SingleCategory[i].Word}";
+                    link1.rel = "get_self";
+                    link1.method = "GET";
 
+                    SingleCategory[i].links.Add(link);
+                    SingleCategory[i].links.Add(link1);
+                }
+                MemoryCacher.Add("CategoryEntries", SingleCategory, DateTimeOffset.UtcNow.AddMinutes(1));
+                return Ok(SingleCategory);
+            }
         }
 
         [Route("api/quotedictionary/categories/{category}")]
-        [System.Web.Http.HttpDelete]
-        
+        [HttpDelete]
         public IHttpActionResult DeleteCategory(string category) //Delete category
         {
             bool deleted = Models.SqlLite.DeleteCategory(category);
@@ -180,7 +188,7 @@ namespace WebEndProject.Controllers
         }
 
         [Route("api/quotedictionary/words/{word}")]
-        [System.Web.Http.HttpDelete]
+        [HttpDelete]
         public IHttpActionResult DeleteWord(string word) //Delete word
         {
             bool deleted = Models.SqlLite.DeleteWord(word);
@@ -195,7 +203,7 @@ namespace WebEndProject.Controllers
         }
 
         [Route("api/quotedictionary/words/{word}")]
-        [System.Web.Http.HttpGet]
+        [HttpGet]
         public ExternalAPI.Dictionary GetSingleWord(string word) //Gauna single word
         {
 

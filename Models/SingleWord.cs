@@ -11,7 +11,7 @@ namespace WebEndProject.Models
         public string Category;
         public string Word;
         public int DayTime;
-        public List<string> links=new List<string>();
+        public List<Link> links=new List<Link>();
         public void SetID(int id)
         {
             ID = id;

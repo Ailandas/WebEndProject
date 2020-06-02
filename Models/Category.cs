@@ -8,7 +8,7 @@ namespace WebEndProject.Models
     public class Category
     {
         public string name;
-        public List<string> links;
+        public List<Link> links;
         public void SetName(string demoName)
         {
             name = demoName;
@@ -17,11 +17,11 @@ namespace WebEndProject.Models
         {
             return name;
         }
-        public void SetLinks(List<string> demoLinks)
+        public void SetLinks(List<Link> demoLinks)
         {
             links = demoLinks;
         }
-        public List<string> GetLinks()
+        public List<Link> GetLinks()
         {
             return links;
         }
