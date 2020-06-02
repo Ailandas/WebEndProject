@@ -213,7 +213,7 @@ namespace WebEndProject.Models
                     return true;
                 }
             }
-            catch(Exception exc)
+            catch
             {
                 return false;
             }
@@ -235,7 +235,7 @@ namespace WebEndProject.Models
                     return true;
                 }
             }
-            catch (Exception exc)
+            catch
             {
                 return false;
             }

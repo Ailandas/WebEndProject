@@ -178,3 +178,6 @@ C:\Users\Ailandas\Desktop\Web Paslaugos\WebGalutinis\WebEndProject-d7c898efca2d5
 C:\Users\getti\Desktop\WorldOfQuotes\WebEndProject\bin\System.Data.SQLite.dll
 C:\Users\getti\Desktop\WorldOfQuotes\WebEndProject\bin\System.Data.SQLite.xml
 C:\Users\getti\Desktop\WorldOfQuotes\WebEndProject\bin\System.Data.SQLite.dll.config
+C:\Users\getti\Desktop\WorldOfQuotes\WebEndProject\bin\WebEndProject.xml
+C:\Users\getti\Desktop\WorldOfQuotes\WebEndProject\bin\Swashbuckle.Core.dll
+C:\Users\getti\Desktop\WorldOfQuotes\WebEndProject\bin\WebActivatorEx.dll

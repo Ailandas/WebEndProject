@@ -20,7 +20,14 @@ namespace WebEndProject.Controllers
         //http://localhost:58065/api/quoteDictionary?kategorija=kategorija&zodis=zodis&laikas=diena Patalpinti nauja
 
         ////////////////custom //////////////////////////////////
+        
+        /// <summary>
+        /// Metodas, grazinantis zodi ir quote is pasirinktos kategorijos
+        /// </summary>
+        /// <param name="category">Kategorijos pavadinimas</param>
+        /// <returns></returns>
         [Route("api/quotedictionary/{category}")]
+        [HttpGet]
         public List<object> Get(string category)
         {
             
@@ -59,10 +66,14 @@ namespace WebEndProject.Controllers
              }
         }
 
-
+        /// <summary>
+        /// Metodas, iterpiantis nauja irasa i duomenu baze
+        /// </summary>
+        /// <param name="obj">Iraso objektas(kategorija,zodis,laikas)</param>
+        /// <returns></returns>
         [Route("api/quotedictionary")]
         [HttpPost]
-        public IHttpActionResult Post([FromBody] PostObject obj)//Prideda nauja zodi i duombaze
+        public IHttpActionResult Post([FromBody] PostObject obj)
         {
             /*    { "kategorija": "TestKategorija",
                     "zodis": "TestZodis",
@@ -82,15 +93,19 @@ namespace WebEndProject.Controllers
                 }
                 return NotFound();
             }
-            catch (Exception exc)
+            catch
             {
                 return NotFound();
             }
         }
 
+        /// <summary>
+        /// Metodas, grazinantis visas kategorijas
+        /// </summary>
+        /// <returns></returns>
         [Route("api/quotedictionary/categories")]
         [HttpGet]
-        public List<Category> GetCategories() //Grazins visa sarasa kategoriju su reiksmemis
+        public List<Category> GetCategories()
         {
             string baseUrl = (Url.Request.RequestUri.GetComponents(
                     UriComponents.SchemeAndServer, UriFormat.Unescaped).TrimEnd('/')
@@ -134,9 +149,14 @@ namespace WebEndProject.Controllers
 
         }
 
+        /// <summary>
+        /// Metodas, grazinantis zodzius is kategorijos
+        /// </summary>
+        /// <param name="category">Kategorijos pavadinimas</param>
+        /// <returns></returns>
         [Route("api/quotedictionary/categories/{category}")]
         [HttpGet]
-        public IHttpActionResult GetCategoryEntries(string category) // Grazins visas reiksmes is kategorijos
+        public IHttpActionResult GetCategoryEntries(string category)
         {
             List<SingleWord> cachingList = new List<SingleWord>();
             cachingList = (List<SingleWord>)MemoryCacher.GetValue("CategoryEntries");
@@ -172,9 +192,14 @@ namespace WebEndProject.Controllers
             }
         }
 
+        /// <summary>
+        /// Metodas, istrinantis kategorija
+        /// </summary>
+        /// <param name="category">Kategorijos pavadinimas</param>
+        /// <returns></returns>
         [Route("api/quotedictionary/categories/{category}")]
         [HttpDelete]
-        public IHttpActionResult DeleteCategory(string category) //Delete category
+        public IHttpActionResult DeleteCategory(string category) 
         {
             bool deleted = Models.SqlLite.DeleteCategory(category);
             if (deleted == true)
@@ -187,9 +212,14 @@ namespace WebEndProject.Controllers
             }
         }
 
+        /// <summary>
+        /// Metodas, istrinantis zodi
+        /// </summary>
+        /// <param name="word">Zodis</param>
+        /// <returns></returns>
         [Route("api/quotedictionary/words/{word}")]
         [HttpDelete]
-        public IHttpActionResult DeleteWord(string word) //Delete word
+        public IHttpActionResult DeleteWord(string word)
         {
             bool deleted = Models.SqlLite.DeleteWord(word);
             if (deleted == true)
@@ -202,9 +232,14 @@ namespace WebEndProject.Controllers
             }
         }
 
+        /// <summary>
+        /// Metodas, grazinantis zodi
+        /// </summary>
+        /// <param name="word">Zodis</param>
+        /// <returns></returns>
         [Route("api/quotedictionary/words/{word}")]
         [HttpGet]
-        public ExternalAPI.Dictionary GetSingleWord(string word) //Gauna single word
+        public ExternalAPI.Dictionary GetSingleWord(string word)
         {
 
             ExternalAPI.Dictionary dictionary = (ExternalAPI.Dictionary)MemoryCacher.GetValue(word);
