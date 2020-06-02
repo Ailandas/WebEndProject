@@ -159,7 +159,7 @@ namespace WebEndProject.Controllers
         public IHttpActionResult GetCategoryEntries(string category)
         {
             List<SingleWord> cachingList = new List<SingleWord>();
-            cachingList = (List<SingleWord>)MemoryCacher.GetValue("CategoryEntries");
+            cachingList = (List<SingleWord>)MemoryCacher.GetValue(category);
             if (cachingList != null)
             {
                 return Ok(cachingList);
@@ -187,7 +187,7 @@ namespace WebEndProject.Controllers
                     SingleCategory[i].links.Add(link);
                     SingleCategory[i].links.Add(link1);
                 }
-                MemoryCacher.Add("CategoryEntries", SingleCategory, DateTimeOffset.UtcNow.AddMinutes(1));
+                MemoryCacher.Add(category, SingleCategory, DateTimeOffset.UtcNow.AddMinutes(1));
                 return Ok(SingleCategory);
             }
         }
