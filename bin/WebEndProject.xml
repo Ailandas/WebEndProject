@@ -508,6 +508,13 @@
             <param name="category">Kategorijos pavadinimas</param>
             <returns></returns>
         </member>
+        <member name="M:WebEndProject.Controllers.QuoteController.UpdateCategoryName(WebEndProject.Models.PutObject)">
+            <summary>
+            Metodas skirtas atnaujinti kategorijos pavadinima
+            </summary>
+            <param name="putObject">Objektas laikantis informacija apie nauja ir sena kategorija</param>
+            <returns></returns>
+        </member>
         <member name="M:WebEndProject.Controllers.QuoteController.DeleteCategory(System.String)">
             <summary>
             Metodas, istrinantis kategorija
@@ -520,6 +527,13 @@
             Metodas, istrinantis zodi
             </summary>
             <param name="word">Zodis</param>
+            <returns></returns>
+        </member>
+        <member name="M:WebEndProject.Controllers.QuoteController.UpdateSingleWord(WebEndProject.Models.PutObject)">
+            <summary>
+            Metodas skirtas atnaujinti zodi duomenu bazeje
+            </summary>
+            <param name="putObject">Objektas laikantis informacija apie sena ir nauja zodi</param>
             <returns></returns>
         </member>
         <member name="M:WebEndProject.Controllers.QuoteController.GetSingleWord(System.String)">

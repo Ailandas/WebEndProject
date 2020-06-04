@@ -35,6 +35,71 @@ namespace WebEndProject.Models
             }
             return Categories;
         }
+        public static bool UpdateCategoryName(string newCategory, string oldCategory)
+        {
+            try
+            {
+                using (SQLiteConnection m_dbConnection = new SQLiteConnection("Data Source=" + kelias))
+                {
+                    string sql1 = $"UPDATE Categories SET Category='{newCategory}' WHERE Category='{oldCategory}'";
+                    SQLiteCommand command1 = new SQLiteCommand(sql1, m_dbConnection);
+                    m_dbConnection.Open();
+                    command1.ExecuteNonQuery();
+                    m_dbConnection.Close();
+                    return true;
+                }
+            }
+            catch (Exception exc)
+            {
+                return false;
+            }
+        }
+
+        public static bool UpdateSingleWord(string newWord, string oldWord)
+        {
+            using (SQLiteConnection m_dbConnection = new SQLiteConnection("Data Source=" + kelias))
+            {
+                string sql1 = $"UPDATE Categories SET Word='{newWord}' WHERE Word='{oldWord}'";
+                SQLiteCommand command1 = new SQLiteCommand(sql1, m_dbConnection);
+                m_dbConnection.Open();
+                command1.ExecuteNonQuery();
+                m_dbConnection.Close();
+                return true;
+            }
+
+        }
+
+        public static bool CheckIfWordExists(string word)
+        {
+            string data = "";
+            bool Egzists = false;
+            using (SQLiteConnection m_dbConnection = new SQLiteConnection(@"Data Source=" + kelias))
+            {
+                m_dbConnection.Open();
+                using (SQLiteCommand command3 = new SQLiteCommand($"SELECT Word FROM Categories", m_dbConnection))
+                {
+
+                    SQLiteDataReader reader3 = command3.ExecuteReader();
+                    while (reader3.Read())
+                    {
+
+                        data = Convert.ToString(reader3[0]);
+                        if (data == word)
+                        {
+                            Egzists = true;
+
+                        }
+
+
+                    }
+                }
+                m_dbConnection.Close();
+            }
+
+            return Egzists;
+
+        }
+
         public static void InsertToDatabase(string Category, string Word, int DayTime)
         {
             try
@@ -81,7 +146,7 @@ namespace WebEndProject.Models
                         if (data == Category)
                         {
                             Egzists = true;
-                            break;
+                           
 
                         }
 

@@ -17,7 +17,7 @@ namespace WebEndProject.Controllers
 {
     public class QuoteController : ApiController
     {
-        //http://localhost:58065/api/quoteDictionary?kategorija=kategorija&zodis=zodis&laikas=diena Patalpinti nauja
+        
 
         ////////////////custom //////////////////////////////////
         
@@ -130,11 +130,16 @@ namespace WebEndProject.Controllers
                     Link link1 = new Link();
                     link1.href = baseUrl + $"/api/quotedictionary/categories/{categories[i].GetName()}";
                     link1.method = "GET";
-                    link1.rel = "delete_self";
+                    link1.rel = "get_self";
+                    Link link2 = new Link();
+                    link2.href = baseUrl + $"/api/quotedictionary/categories/";
+                    link2.method = "PUT";
+                    link2.rel = "put_self";
 
                     List<Link> tempLinks = new List<Link>();
                     tempLinks.Add(link);
                     tempLinks.Add(link1);
+                    tempLinks.Add(link2);
 
                     categories[i].SetLinks(tempLinks);
                 }
@@ -183,15 +188,45 @@ namespace WebEndProject.Controllers
                     link1.href = "GET self : " + baseUrl + $"/api/quotedictionary/words/{SingleCategory[i].Word}";
                     link1.rel = "get_self";
                     link1.method = "GET";
+                    Link link2 = new Link();
+                    link2.href = baseUrl + $"/api/quotedictionary/words/";
+                    link2.method = "PUT";
+                    link2.rel = "put_self";
 
                     SingleCategory[i].links.Add(link);
                     SingleCategory[i].links.Add(link1);
+                    SingleCategory[i].links.Add(link2);
                 }
                 MemoryCacher.Add(category, SingleCategory, DateTimeOffset.UtcNow.AddMinutes(1));
                 return Ok(SingleCategory);
             }
         }
 
+        /// <summary>
+        /// Metodas skirtas atnaujinti kategorijos pavadinima
+        /// </summary>
+        /// <param name="putObject">Objektas laikantis informacija apie nauja ir sena kategorija</param>
+        /// <returns></returns>
+        [Route("api/quotedictionary/categories/")]
+        [HttpPut]
+        public IHttpActionResult UpdateCategoryName([FromBody] PutObject putObject)
+        {
+            string oldData = putObject.oldData;
+            string newData = putObject.newData;
+            bool Existance = Models.SqlLite.CheckIfCategoryEgzists(oldData);
+            if(Existance==true)
+            {
+                Models.SqlLite.UpdateCategoryName(newData, oldData);
+                return Ok();
+            }
+            else
+            {
+                return NotFound();
+            }
+           
+            
+
+        }
         /// <summary>
         /// Metodas, istrinantis kategorija
         /// </summary>
@@ -224,6 +259,31 @@ namespace WebEndProject.Controllers
             bool deleted = Models.SqlLite.DeleteWord(word);
             if (deleted == true)
             {
+                return Ok();
+            }
+            else
+            {
+                return NotFound();
+            }
+        }
+
+        /// <summary>
+        /// Metodas skirtas atnaujinti zodi duomenu bazeje
+        /// </summary>
+        /// <param name="putObject">Objektas laikantis informacija apie sena ir nauja zodi</param>
+        /// <returns></returns>
+        [Route("api/quotedictionary/words/")]
+        [HttpPut]
+        public IHttpActionResult UpdateSingleWord([FromBody] PutObject putObject)
+        {
+            string oldData = putObject.oldData;
+            string newData = putObject.newData;
+           // Models.SqlLite.UpdateSingleWord(newData, oldData);
+            
+            bool Existance = Models.SqlLite.CheckIfWordExists(oldData);
+            if (Existance == true)
+            {
+                Models.SqlLite.UpdateSingleWord(newData, oldData);
                 return Ok();
             }
             else

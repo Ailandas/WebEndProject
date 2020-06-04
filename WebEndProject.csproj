@@ -184,6 +184,7 @@
     <Compile Include="Models\Link.cs" />
     <Compile Include="Models\MemoryCacher.cs" />
     <Compile Include="Models\PostObject.cs" />
+    <Compile Include="Models\PutObject.cs" />
     <Compile Include="Models\Quote.cs" />
     <Compile Include="Models\SqlLite.cs" />
     <Compile Include="Models\Time.cs" />
