@@ -20,22 +20,22 @@ namespace Tests.Feature
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "3.1.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [NUnit.Framework.TestFixtureAttribute()]
-    [NUnit.Framework.DescriptionAttribute("GetCategories")]
-    public partial class GetCategoriesFeature
+    [NUnit.Framework.DescriptionAttribute("GetWordAndQuoteFromCategory")]
+    public partial class GetWordAndQuoteFromCategoryFeature
     {
         
         private TechTalk.SpecFlow.ITestRunner testRunner;
         
         private string[] _featureTags = ((string[])(null));
         
-#line 1 "GetAllCategories.feature"
+#line 1 "GetWordAndQuoteFromCategory.feature"
 #line hidden
         
         [NUnit.Framework.OneTimeSetUpAttribute()]
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "GetCategories", "\tNoriu gauti kategorijas", ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "GetWordAndQuoteFromCategory", "\tnoriu gauti zodi ir quote is kategorijos (pagal dienos laika)", ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -74,14 +74,14 @@ namespace Tests.Feature
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("I want to get a list of all available categories")]
-        [NUnit.Framework.CategoryAttribute("GetAllCategories")]
-        public virtual void IWantToGetAListOfAllAvailableCategories()
+        [NUnit.Framework.DescriptionAttribute("I want to get a word and a quote")]
+        [NUnit.Framework.CategoryAttribute("GetWord")]
+        public virtual void IWantToGetAWordAndAQuote()
         {
             string[] tagsOfScenario = new string[] {
-                    "GetAllCategories"};
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("I want to get a list of all available categories", null, new string[] {
-                        "GetAllCategories"});
+                    "GetWord"};
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("I want to get a word and a quote", null, new string[] {
+                        "GetWord"});
 #line 5
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -103,16 +103,16 @@ this.ScenarioInitialize(scenarioInfo);
             {
                 this.ScenarioStart();
 #line 6
-testRunner.Given("I have a link to all categories", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+ testRunner.Given("I have a link with category", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 7
-testRunner.When("I press enter", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.When("I proceed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 8
-testRunner.Then("Result should be returned", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("Result of the word should be returned", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
 #line 9
-testRunner.And("I get a list of categories", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("I get a word and a quote", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             }
             this.ScenarioCleanup();

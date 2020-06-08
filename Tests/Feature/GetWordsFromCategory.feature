@@ -8,4 +8,5 @@ Scenario: I wanna get all words from a certain category
 	Given I have a link
 	When When I enter a category
 	And Press enter
-	Then the result should be visible
+	Then result should be returned
+	And the result should be visible
