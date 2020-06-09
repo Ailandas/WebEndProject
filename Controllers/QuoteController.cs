@@ -176,29 +176,37 @@ namespace WebEndProject.Controllers
               + System.Web.HttpContext.Current.Request.ApplicationPath).TrimEnd('/');
 
                 List<SingleWord> SingleCategory = Models.SqlLite.GetEntriesByCategory(category);
-                for (int i = 0; i < SingleCategory.Count; i++)
+                if (SingleCategory.Count > 0)
                 {
-                    //linkas deletinimui
-                    Link link = new Link();
-                    link.href = "DELETE: " + baseUrl + $"/api/quotedictionary/words/{SingleCategory[i].Word}";
-                    link.method = "DELETE";
-                    link.rel = "delete_self";
-                    //linkas getinimui
-                    Link link1 = new Link();
-                    link1.href = "GET self : " + baseUrl + $"/api/quotedictionary/words/{SingleCategory[i].Word}";
-                    link1.rel = "get_self";
-                    link1.method = "GET";
-                    Link link2 = new Link();
-                    link2.href = baseUrl + $"/api/quotedictionary/words/";
-                    link2.method = "PUT";
-                    link2.rel = "put_self";
+                    for (int i = 0; i < SingleCategory.Count; i++)
+                    {
+                        //linkas deletinimui
+                        Link link = new Link();
+                        link.href = "DELETE: " + baseUrl + $"/api/quotedictionary/words/{SingleCategory[i].Word}";
+                        link.method = "DELETE";
+                        link.rel = "delete_self";
+                        //linkas getinimui
+                        Link link1 = new Link();
+                        link1.href = "GET self : " + baseUrl + $"/api/quotedictionary/words/{SingleCategory[i].Word}";
+                        link1.rel = "get_self";
+                        link1.method = "GET";
+                        Link link2 = new Link();
+                        link2.href = baseUrl + $"/api/quotedictionary/words/";
+                        link2.method = "PUT";
+                        link2.rel = "put_self";
 
-                    SingleCategory[i].links.Add(link);
-                    SingleCategory[i].links.Add(link1);
-                    SingleCategory[i].links.Add(link2);
+                        SingleCategory[i].links.Add(link);
+                        SingleCategory[i].links.Add(link1);
+                        SingleCategory[i].links.Add(link2);
+                    }
+                    MemoryCacher.Add(category, SingleCategory, DateTimeOffset.UtcNow.AddMinutes(1));
+                    return Ok(SingleCategory);
                 }
-                MemoryCacher.Add(category, SingleCategory, DateTimeOffset.UtcNow.AddMinutes(1));
-                return Ok(SingleCategory);
+                else
+                {
+                    return NotFound();
+                }
+               
             }
         }
 
