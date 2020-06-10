@@ -51,10 +51,12 @@ namespace WebEndProject.Controllers
                     ExternalAPI._150000quotes fetchQuote = new ExternalAPI._150000quotes(category);//gauna quote pagal keyword
 
                     ExternalAPI.Translator fetchTranslation = new ExternalAPI.Translator(fetchQuote.quote.Message);
+                    ExternalAPI.Translator fetchTranslation1 = new ExternalAPI.Translator(singleWord.GetWord());
 
                     List<object> TempCachingList = new List<object>();
                     TempCachingList.Add(fetchQuote.quote.Message);
                     TempCachingList.Add(fetchTranslation.translatedText.ToString());
+                    TempCachingList.Add(fetchTranslation1);
                     TempCachingList.Add(fetchWord.o);
                     MemoryCacher.Add(category, TempCachingList, DateTimeOffset.UtcNow.AddMinutes(1));
                     return TempCachingList;
