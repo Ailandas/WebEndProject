@@ -68,7 +68,7 @@ namespace Tests.Steps
         {
             customString = await response.Content.ReadAsStringAsync();
             Console.WriteLine("Content: " + customString);
-            if (customString != null && customString != "[]")
+            if (customString.Length == 0)
                 throw new Exception("Content: " + customString);
         }
         private void UnUpdate()

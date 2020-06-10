@@ -215,3 +215,4 @@ C:\Users\getti\Desktop\WorldOfQuotes\Tests\obj\Debug\netcoreapp3.1\Tests.dll
 C:\Users\getti\Desktop\WorldOfQuotes\Tests\obj\Debug\netcoreapp3.1\Tests.pdb
 C:\Users\getti\Desktop\WorldOfQuotes\Tests\obj\Debug\netcoreapp3.1\Tests.genruntimeconfig.cache
 C:\Users\Ailandas\Desktop\Web Paslaugos\WebGalutinis\Tests\obj\Debug\netcoreapp3.1\Tests.csprojAssemblyReference.cache
+C:\Users\getti\Desktop\WorldOfQuotes\Tests\obj\Debug\netcoreapp3.1\Tests.csprojAssemblyReference.cache

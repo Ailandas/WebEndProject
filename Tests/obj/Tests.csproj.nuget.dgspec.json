@@ -1,26 +1,21 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Ailandas\\Desktop\\Web Paslaugos\\WebGalutinis\\Tests\\Tests.csproj": {}
+    "C:\\Users\\getti\\Desktop\\WorldOfQuotes\\Tests\\Tests.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Ailandas\\Desktop\\Web Paslaugos\\WebGalutinis\\Tests\\Tests.csproj": {
+    "C:\\Users\\getti\\Desktop\\WorldOfQuotes\\Tests\\Tests.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Ailandas\\Desktop\\Web Paslaugos\\WebGalutinis\\Tests\\Tests.csproj",
+        "projectUniqueName": "C:\\Users\\getti\\Desktop\\WorldOfQuotes\\Tests\\Tests.csproj",
         "projectName": "Tests",
-        "projectPath": "C:\\Users\\Ailandas\\Desktop\\Web Paslaugos\\WebGalutinis\\Tests\\Tests.csproj",
-        "packagesPath": "C:\\Users\\Ailandas\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Ailandas\\Desktop\\Web Paslaugos\\WebGalutinis\\Tests\\obj\\",
+        "projectPath": "C:\\Users\\getti\\Desktop\\WorldOfQuotes\\Tests\\Tests.csproj",
+        "packagesPath": "C:\\Users\\getti\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\getti\\Desktop\\WorldOfQuotes\\Tests\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Microsoft\\Xamarin\\NuGet\\",
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Ailandas\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+          "C:\\Users\\getti\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"
@@ -82,12 +77,18 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[3.1.2, 3.1.2]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.300\\RuntimeIdentifierGraph.json"
         }
       }
     }

@@ -80,8 +80,8 @@ namespace Tests.Steps
         {
             customString = await response.Content.ReadAsStringAsync();
             Console.WriteLine("Content: " + customString);
-            if (customString != null && customString!="[]")
-                throw new Exception("Content: " + customString);
+            if (customString.Length!=0)
+                throw new Exception("Content: " + customString+"    "+customString.Length);
         }
     }
 }

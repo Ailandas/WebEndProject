@@ -18,8 +18,8 @@ namespace Tests.Steps
         public string customString = null;
         public class TempObj1
         {
-            public string oldData = "Test";
-            public string newData = "TestUpdate";
+            public string oldData = "TestUpdate22";
+            public string newData = "TestUpdate11";
         }
 
         [Given(@"I have a new category name")]
@@ -49,7 +49,7 @@ namespace Tests.Steps
         {
             Console.WriteLine("RESPONSE: " + result.IsSuccessStatusCode.ToString());
             if (!result.IsSuccessStatusCode)
-                throw new Exception("Error Response");
+                throw new Exception("Error Response  "+result.IsSuccessStatusCode.ToString());
         }
         
         [Then(@"The category name has changed")]
@@ -69,7 +69,7 @@ namespace Tests.Steps
         {
             customString = await response.Content.ReadAsStringAsync();
             Console.WriteLine("Content: " + customString);
-            if (customString != null && customString != "[]")
+            if (customString.Length == 0)
                 throw new Exception("Content: " + customString);
         }
         private void UnUpdate()
