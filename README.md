@@ -12,6 +12,7 @@
 10. A news section (usually for users)
 
 1. Būtina įsidiegti duomenų bazę su duomenų modeliu:
-ID | Category | Word | DayTime
------------- | ------------- | ------------- | -------------
-Unikalus ID  | Kategorija | Žodis | Dienos metas
+First Header | Second Header
+------------ | -------------
+Content from cell 1 | Content from cell 2
+Content in the first column | Content in the second column
