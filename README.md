@@ -20,9 +20,9 @@ Category      | Word
 TestUpdate22	|Test update
 Test          | Test
 
-|A|B|C|AA|
-| --- | --- | --- | --- |
-|Q|W   |    E | RR     |
+|ID|Category|Word|DayTime|
+| 0 | TestUpdate22 | Test update | 1 |
+|1|Test|Test|2|
 
 2. Administratorių metodai pridėti, trinti, atnaujinti informaciją susijusią su kategorijomis duomenų bazėje: 
   2.1 POST /api/quotedictionary Metodas, iterpiantis nauja irasa i duomenu baze (duomenys iš body JSON formatu)
