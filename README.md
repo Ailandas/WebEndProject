@@ -16,9 +16,9 @@ Pirma lentelė: „Categories“ ID, Category, Word, DayTime.
 Antra lentelė „DayTime“ ID, Name, After, upTo.
 Taip pat dėl testų būtina užpildyti pirmą lentelę tokiais duomenimis: 
 
-Category | Word
+Category      | Word
 TestUpdate22	|Test update
-Test | Test
+Test          | Test
 
 2. Administratorių metodai pridėti, trinti, atnaujinti informaciją susijusią su kategorijomis duomenų bazėje: 
   2.1 POST /api/quotedictionary Metodas, iterpiantis nauja irasa i duomenu baze (duomenys iš body JSON formatu)
