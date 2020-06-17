@@ -28,7 +28,7 @@ Test | Test
   2.5 PUT /api/quotedictionary/words (duomenys iš body JSON formatu)
 
 3. Web.config failo turinys:
-<configuration>
+```<configuration>
   <appSettings>
     <add key="webpages:Version" value="3.0.0.0" />
     <add key="webpages:Enabled" value="false" />
@@ -94,7 +94,7 @@ Test | Test
     </compilers>
   </system.codedom>
 </configuration>
-
+```
 4. Copyringhts: studentai Ailandas Eidintas- @Ailandas ir Ernestas Baniulis- @makakalaka PI18A Viko.
 5. Contact information: ailandas.eidintas@stud.viko.lt or @Ailandas & ernestas.baniulis@stud.viko.lt or @makakalaka
 6. Knows bugs: Testuojant keli metodai vienu metu kreipiasi į duomenų bazę todėl gali rodyti klaidą pavadinimu „Database locked“  todėl rekomenduojama tokius metodus testuoti po vieną. 
