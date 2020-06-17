@@ -16,10 +16,6 @@ Pirma lentelė: „Categories“ ID, Category, Word, DayTime.
 Antra lentelė „DayTime“ ID, Name, After, upTo.
 Taip pat dėl testų būtina užpildyti pirmą lentelę tokiais duomenimis: 
 
-Category      | Word
-TestUpdate22	|Test update
-Test          | Test
-
 |ID|Category|Word|DayTime|
 | --- | --- | --- | --- |
 | 0 | TestUpdate22 | Test update | 1 |
