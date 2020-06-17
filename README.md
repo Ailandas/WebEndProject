@@ -1,15 +1,15 @@
-<h1>WebEndProject</h1>
-**Table of contents:**
-1. Installation instructions
-2. Operating instructions
-3. Configuration
-4. Copyright and licensing information
-5. Contact information for the distributor or programmer
-6. Known bugs
-7. Troubleshooting
-8. Credits and acknowledgments
-9. A changelog (usually for programmers)
-10. A news section (usually for users)
+<h2>WebEndProject</h2>
+<h1>Table of contents:</h1>
+* 1. Installation instructions
+* 2. Operating instructions
+* 3. Configuration
+* 4. Copyright and licensing information
+* 5. Contact information for the distributor or programmer
+* 6. Known bugs
+* 7. Troubleshooting
+* 8. Credits and acknowledgments
+* 9. A changelog (usually for programmers)
+* 10. A news section (usually for users)
 
 1. Būtina įsidiegti duomenų bazę su duomenų modeliu:
 Pirma lentelė: „Categories“ ID, Category, Word, DayTime.
@@ -22,11 +22,11 @@ Taip pat dėl testų būtina užpildyti pirmą lentelę tokiais duomenimis:
 |1|Test|Test|2|
 
 2. Administratorių metodai pridėti, trinti, atnaujinti informaciją susijusią su kategorijomis duomenų bazėje: 
-  2.1 POST /api/quotedictionary Metodas, iterpiantis nauja irasa i duomenu baze (duomenys iš body JSON formatu)
-  2.2 PUT /api/quotedictionary/categories Metodas skirtas atnaujinti kategorijos pavadinima (duomenys iš body JSON formatu)
-  2.3 DELETE /api/quotedictionary/categories/{category} (Trinamos kategorijos pavadinimas prirašomas link'e, kur {category})
-  2.4 DELETE /api/quotedictionary/words/{word} (Trinamo žodžio pavadinimas prirašomas link'e, kur {word})
-  2.5 PUT /api/quotedictionary/words (duomenys iš body JSON formatu)
+ * 2.1 POST /api/quotedictionary Metodas, iterpiantis nauja irasa i duomenu baze (duomenys iš body JSON formatu)
+ * 2.2 PUT /api/quotedictionary/categories Metodas skirtas atnaujinti kategorijos pavadinima (duomenys iš body JSON formatu)
+ * 2.3 DELETE /api/quotedictionary/categories/{category} (Trinamos kategorijos pavadinimas prirašomas link'e, kur {category})
+ * 2.4 DELETE /api/quotedictionary/words/{word} (Trinamo žodžio pavadinimas prirašomas link'e, kur {word})
+ * 2.5 PUT /api/quotedictionary/words (duomenys iš body JSON formatu)
 
 3. Web.config failo turinys:
 ```<configuration>
